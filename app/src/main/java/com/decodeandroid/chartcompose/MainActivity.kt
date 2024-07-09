@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
@@ -28,6 +29,7 @@ import com.decodeandroid.compose_charts.PieChart
 import com.decodeandroid.compose_charts.model.PieChartInput
 import com.decodeandroid.compose_charts.style.PieChartStyle
 import com.decodeandroid.compose_charts.style.PieChartVisibility
+import com.decodeandroid.compose_charts.utils.TriangleShape
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -97,19 +99,19 @@ fun BodyContent(paddingValue: PaddingValues) {
 
                 val pieChartStyle = PieChartStyle(
                     visibility = PieChartVisibility(
-                        isLabelVisible = false,
-                        isCenterCircleVisible = true,
-                        isCenterTextVisible = true
+                        isLabelVisible = true,
+                        isCenterCircleVisible = false,
+                        isCenterTextVisible = false
                     ),
                     labelSize = 10.sp,
-                    centerText = "Pie Chart New"
+                    centerText = "Pie Chart Data"
                 )
 
                 val legendsConfig = LegendsConfig(
                     legendsArrangement = Arrangement.Start,
                     textStyle = TextStyle(),
-                    legendAxis = LegendAxis.HORIZONTAL,
-                    legendShape = RoundedCornerShape(5.dp)
+                    legendAxis = LegendAxis.VERTICAL,
+                    legendShape = RoundedCornerShape(4.dp)
                 )
 
                 PieChart(
