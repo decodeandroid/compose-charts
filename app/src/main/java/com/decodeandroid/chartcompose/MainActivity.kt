@@ -133,5 +133,6 @@ fun BodyContent(paddingValue: PaddingValues) {
 @Composable
 fun MainAppPreview() {
     MainApp()
+    //
 }
 
