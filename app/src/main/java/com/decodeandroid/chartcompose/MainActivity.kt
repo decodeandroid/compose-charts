@@ -9,7 +9,6 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
@@ -20,13 +19,20 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.decodeandroid.compose_charts.DonutChartImpl
+import com.decodeandroid.compose_charts.PieChart
+import com.decodeandroid.compose_charts.PieChartImpl
 import com.decodeandroid.compose_charts.style.LegendAxis
 import com.decodeandroid.compose_charts.style.LegendsConfig
-import com.decodeandroid.compose_charts.PieChart
 import com.decodeandroid.compose_charts.model.PieChartInput
+import com.decodeandroid.compose_charts.style.DonutChartStyle
+import com.decodeandroid.compose_charts.style.DonutChartVisibility
+import com.decodeandroid.compose_charts.style.LegendShape
 import com.decodeandroid.compose_charts.style.PieChartStyle
 import com.decodeandroid.compose_charts.style.PieChartVisibility
 import com.decodeandroid.compose_charts.utils.TriangleShape
@@ -69,58 +75,97 @@ fun BodyContent(paddingValue: PaddingValues) {
         contentPadding = paddingValue,
         content = {
 
-            item(key = "item-1") {
-                val dataList = listOf(
-                    PieChartInput(
-                        value = 35,
-                        label = "Data 1"
-                    ),
-                    PieChartInput(
-                        value = 21,
-                        label = "Data 2"
-                    ),
-                    PieChartInput(
-                        value = 32,
-                        label = "Data 3"
-                    ),
-                    PieChartInput(
-                        value = 18,
-                        label = "Data 4"
-                    ),
-                    PieChartInput(
-                        value = 12,
-                        label = "Data 5"
-                    ),
-                    PieChartInput(
-                        value = 38,
-                        label = "Data 6"
-                    )
+            val dataList = listOf(
+                PieChartInput(
+                    value = 35,
+                    label = "Data 1"
+                ),
+                PieChartInput(
+                    value = 21,
+                    label = "Data 2"
+                ),
+                PieChartInput(
+                    value = 32,
+                    label = "Data 3"
+                ),
+                PieChartInput(
+                    value = 18,
+                    label = "Data 4"
+                ),
+                PieChartInput(
+                    value = 12,
+                    label = "Data 5"
+                ),
+                PieChartInput(
+                    value = 38,
+                    label = "Data 6"
                 )
+            )
 
+            val legendsConfig = LegendsConfig(
+                legendsArrangement = Arrangement.Start,
+                textStyle = TextStyle(
+                    fontWeight = FontWeight.Normal,
+                    fontSize = 16.sp,
+                    letterSpacing = 0.25.sp
+                ),
+                legendAxis = LegendAxis.HORIZONTAL,
+                legendShape = LegendShape.Circle
+            )
+
+            item(key = "item-1") {
                 val pieChartStyle = PieChartStyle(
                     visibility = PieChartVisibility(
                         isLabelVisible = true,
                         isCenterCircleVisible = false,
-                        isCenterTextVisible = false
+                        isCenterTextVisible = true
                     ),
-                    labelSize = 10.sp,
+                    textStyle = TextStyle(
+                        fontStyle = FontStyle.Italic,
+                        fontWeight = FontWeight.Normal,
+                        fontSize = 8.sp,
+                    ),
                     centerText = "Pie Chart Data"
                 )
 
-                val legendsConfig = LegendsConfig(
-                    legendsArrangement = Arrangement.Start,
-                    textStyle = TextStyle(),
-                    legendAxis = LegendAxis.VERTICAL,
-                    legendShape = RoundedCornerShape(4.dp)
-                )
-
-                PieChart(
+                PieChartImpl(
                     dataList = dataList,
                     pieChartStyle = pieChartStyle,
                     legendsConfig = legendsConfig
                 ) {
                     Toast.makeText(context, it.label, Toast.LENGTH_SHORT).show()
                 }
+
+
+            }
+
+            item(key = "item-2") {
+
+                val donutChartStyle = DonutChartStyle(
+                    visibility = DonutChartVisibility(
+                        isLabelVisible = true,
+                        isDescriptionVisible = false,
+                        isCenterTextVisible = true
+                    ),
+                    textStyle = TextStyle(
+                        fontStyle = FontStyle.Italic,
+                        fontWeight = FontWeight.Normal,
+                        fontSize = 8.sp,
+                    ),
+                    centerText = "Donut Chart Data"
+                )
+
+
+
+                DonutChartImpl(
+                    dataList = dataList,
+                    donutChartStyle = donutChartStyle,
+                    legendsConfig = legendsConfig,
+                    isProgressAnimated=true,
+                ) {
+                    Toast.makeText(context, it.label, Toast.LENGTH_SHORT).show()
+                }
+
 
             }
 

@@ -5,6 +5,8 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -12,6 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import com.decodeandroid.compose_charts.utils.TriangleShape
 
 /**
  * Renders the list of legends in a grid format for given given grid column count
@@ -46,8 +49,12 @@ private fun Legend(config: LegendsConfig, legendLabel: LegendLabel) {
         horizontalArrangement = config.legendsArrangement,
         verticalAlignment = Alignment.CenterVertically
     ) {
-        val boxModifier = Modifier
-            .size(config.colorBoxSize).clip(config.legendShape)
+        val shape=when(config.legendShape){
+            LegendShape.Triangle-> TriangleShape()
+            LegendShape.Circle -> CircleShape
+            LegendShape.RoundCorner-> RoundedCornerShape(5.dp)
+        }
+        val boxModifier = Modifier.size(config.colorBoxSize).clip(shape)
 
         if (legendLabel.brush != null) {
             Box(modifier = boxModifier.background(legendLabel.brush))

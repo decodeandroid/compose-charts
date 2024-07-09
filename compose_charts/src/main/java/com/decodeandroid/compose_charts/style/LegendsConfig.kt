@@ -23,20 +23,23 @@ import androidx.compose.ui.unit.sp
  *  */
 data class LegendsConfig(
     val legendLabelList: List<LegendLabel> = emptyList(),
-    val textSize: TextUnit = 14.sp,
     val gridColumnCount: Int = 1,
     val gridPaddingHorizontal: Dp = 8.dp,
     val gridPaddingVertical: Dp = 8.dp,
     val colorBoxSize: Dp = 20.dp,
     val textStyle: TextStyle = TextStyle(),
-    val spaceBWLabelAndColorBox: Dp = 8.dp,
+    val spaceBWLabelAndColorBox: Dp = 5.dp,
     val legendsArrangement: Arrangement.Horizontal = Arrangement.Center,
     val legendAxis: LegendAxis = LegendAxis.HORIZONTAL,
-    val legendShape: Shape = CircleShape
+    val legendShape: LegendShape = LegendShape.Circle
 )
 
 enum class LegendAxis{
     VERTICAL,HORIZONTAL
+}
+
+enum class LegendShape{
+    Triangle,Circle,RoundCorner
 }
 
 /**

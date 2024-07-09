@@ -54,7 +54,7 @@ import com.decodeandroid.compose_charts.utils.FontSizeRange
 import kotlin.math.atan2
 
 @Composable
-fun PieChart(
+fun PieChartImpl(
     modifier: Modifier = Modifier,
     dataList: List<PieChartInput>,
     pieChartStyle: PieChartStyle = PieChartStyle(),
@@ -88,7 +88,7 @@ fun PieChart(
                     )
                 )
                 Spacer(modifier = Modifier.height(5.dp))
-                PieChartImpl(modifier = Modifier.align(Alignment.CenterHorizontally),
+                PieChart(modifier = Modifier.align(Alignment.CenterHorizontally),
                     pieDataPoints = dataList,
                     style = pieChartStyle,
                     textColor = textColor,
@@ -108,7 +108,7 @@ fun PieChart(
                 horizontalArrangement = Arrangement.Center
             ) {
 
-                PieChartImpl(modifier = Modifier
+                PieChart(modifier = Modifier
                     .weight(3f)
                     .align(Alignment.CenterVertically),
                     pieDataPoints = dataList,
@@ -140,7 +140,7 @@ fun PieChart(
 }
 
 @Composable
-fun PieChartImpl(
+fun PieChart(
     modifier: Modifier = Modifier,
     innerRadius: Float = 100f,
     transparentWidth: Float = 50f,
@@ -375,7 +375,7 @@ fun PieChartImpl(
                         max = 20.sp,
                     ),
                     overflow = TextOverflow.Ellipsis,
-                    style = MaterialTheme.typography.labelLarge,
+                    style = style.textStyle,
                 )
             }
         }
